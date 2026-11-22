@@ -1,0 +1,39 @@
+name: Homey App Publish & Validate
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  validate-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies & build TypeScript
+        run: |
+          npm ci
+          npm test
+
+      - name: Validate Homey App (publish level)
+        uses: athombv/github-action-homey-app-validate@master
+        with:
+          level: publish
+
+      - name: Publish to Homey App Store (Test channel)
+        if: env.HOMEY_PAT != ''
+        env:
+          HOMEY_PAT: ${{ secrets.HOMEY_PAT }}
+        uses: athombv/github-action-homey-app-publish@master
+        with:
+          personal_access_token: ${{ secrets.HOMEY_PAT }}
