@@ -37,3 +37,11 @@ jobs:
         uses: athombv/github-action-homey-app-publish@master
         with:
           personal_access_token: ${{ secrets.HOMEY_PAT }}
+
+      - name: Announce Test Release in Homey Community Thread (#162541)
+        env:
+          DISCOURSE_API_KEY: ${{ secrets.DISCOURSE_API_KEY }}
+          DISCOURSE_API_USERNAME: ${{ secrets.DISCOURSE_API_USERNAME }}
+        run: |
+          chmod +x ./scripts/post-community-update.sh
+          ./scripts/post-community-update.sh
