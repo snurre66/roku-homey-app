@@ -1,4 +1,7 @@
-Control your Roku TVs and Roku Streaming Players locally via Roku's official External Control Protocol (ECP).
+Control your Roku TVs and Roku Streaming Players locally via Roku's External Control Protocol (ECP).
+
+Disclaimer:
+This is an unofficial, community-developed integration for Homey and is not affiliated with, endorsed by, or sponsored by Roku, Inc.
 
 Features:
 - Native Homey TV Remote Widget support (power, volume, mute, channel, and media playback controls).

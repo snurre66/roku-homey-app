@@ -1,4 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="22" fill="#662D91"/>
-  <text x="50" y="62" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="34" fill="#FFFFFF" text-anchor="middle">ROKU</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- TV Screen & Stand -->
+  <rect x="10" y="16" width="56" height="40" rx="6" stroke="#662D91" stroke-width="6" fill="none"/>
+  <path d="M26 64H50" stroke="#662D91" stroke-width="6" stroke-linecap="round"/>
+  <path d="M38 56V64" stroke="#662D91" stroke-width="6" stroke-linecap="round"/>
+  <!-- Play symbol inside TV -->
+  <polygon points="33,29 47,36 33,43" fill="#662D91"/>
+  <!-- Remote Control overlay -->
+  <rect x="62" y="34" width="28" height="52" rx="8" fill="#662D91"/>
+  <!-- D-Pad on Remote -->
+  <circle cx="76" cy="52" r="7" fill="#FFFFFF"/>
+  <!-- Buttons on Remote -->
+  <rect x="69" y="66" width="6" height="4" rx="2" fill="#FFFFFF"/>
+  <rect x="77" y="66" width="6" height="4" rx="2" fill="#FFFFFF"/>
+  <rect x="69" y="74" width="6" height="4" rx="2" fill="#FFFFFF"/>
+  <rect x="77" y="74" width="6" height="4" rx="2" fill="#FFFFFF"/>
 </svg>
