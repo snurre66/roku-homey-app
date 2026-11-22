@@ -1,0 +1,17 @@
+{
+  "name": "com.roku",
+  "version": "0.1.0",
+  "main": "app.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc && node .homeybuild/test/roku-ecp.test.js",
+    "lint": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  }
+}

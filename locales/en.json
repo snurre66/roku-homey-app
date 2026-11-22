@@ -1,0 +1,28 @@
+{
+  "app": {
+    "name": "Roku"
+  },
+  "errors": {
+    "ecp_forbidden": "Enable Settings → System → Advanced system settings → Control by mobile apps → Permissive",
+    "device_unreachable": "Unable to reach Roku device at __host__:__port__. Please verify the IP address and ensure the Roku is connected to your network.",
+    "not_a_tv": "Switching HDMI input is only supported on Roku TVs."
+  },
+  "pair": {
+    "manual_ip": {
+      "title": "Add Roku Manually",
+      "subtitle": "Enter the IP address of your Roku TV or Streaming Player if automatic discovery did not find it.",
+      "host_label": "IP Address",
+      "host_placeholder": "192.168.1.100",
+      "port_label": "ECP Port",
+      "connect_button": "Connect to Roku"
+    },
+    "verify_device": {
+      "title": "Verifying Mobile App Control...",
+      "checking": "Testing External Control Protocol (ECP) permissions on your Roku...",
+      "forbidden_title": "Control by Mobile Apps is Restricted (HTTP 403)",
+      "forbidden_instruction": "Enable Settings → System → Advanced system settings → Control by mobile apps → Permissive",
+      "retry_button": "Retry Verification",
+      "continue_anyway_button": "Add Device Anyway"
+    }
+  }
+}

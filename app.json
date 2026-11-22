@@ -1,0 +1,345 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.roku",
+  "version": "0.1.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Roku"
+  },
+  "description": {
+    "en": "Control your Roku TVs and Roku Streaming Players via External Control Protocol (ECP)."
+  },
+  "category": [
+    "video"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Roku Homey Developer"
+  },
+  "brandColor": "#662D91",
+  "capabilities": {
+    "roku_active_app": {
+      "type": "string",
+      "title": {
+        "en": "Active App"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capability_active_app.svg"
+    }
+  },
+  "discovery": {
+    "roku_ecp": {
+      "type": "ssdp",
+      "ssdp": {
+        "search": "roku:ecp"
+      },
+      "id": "{{headers.usn}}"
+    }
+  },
+  "drivers": [
+    {
+      "id": "roku",
+      "name": {
+        "en": "Roku"
+      },
+      "class": "tv",
+      "capabilities": [
+        "onoff",
+        "volume_up",
+        "volume_down",
+        "volume_mute",
+        "channel_up",
+        "channel_down",
+        "speaker_playing",
+        "speaker_next",
+        "speaker_prev",
+        "roku_active_app"
+      ],
+      "discovery": "roku_ecp",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/roku/assets/images/small.png",
+        "large": "/drivers/roku/assets/images/large.png",
+        "xlarge": "/drivers/roku/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "verify_device"
+          }
+        },
+        {
+          "id": "manual_ip"
+        },
+        {
+          "id": "verify_device"
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Network Configuration"
+          },
+          "children": [
+            {
+              "id": "host",
+              "type": "text",
+              "label": {
+                "en": "IP Address"
+              },
+              "value": "",
+              "hint": {
+                "en": "The local IPv4 address of the Roku device."
+              }
+            },
+            {
+              "id": "port",
+              "type": "number",
+              "label": {
+                "en": "ECP Port"
+              },
+              "value": 8060,
+              "min": 1,
+              "max": 65535,
+              "hint": {
+                "en": "Roku's default External Control Protocol port is 8060."
+              }
+            },
+            {
+              "id": "poll_interval",
+              "type": "number",
+              "label": {
+                "en": "Poll Interval (seconds)"
+              },
+              "value": 10,
+              "min": 3,
+              "max": 300,
+              "hint": {
+                "en": "How often Homey checks the Roku's power state and active app."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "flow": {
+    "triggers": [
+      {
+        "id": "app_changed",
+        "title": {
+          "en": "App changed"
+        },
+        "titleFormatted": {
+          "en": "Active app changed"
+        },
+        "hint": {
+          "en": "Triggers when the currently running app or channel changes on the Roku device."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=roku"
+          }
+        ],
+        "tokens": [
+          {
+            "name": "app_name",
+            "type": "string",
+            "title": {
+              "en": "App Name"
+            },
+            "example": {
+              "en": "Netflix"
+            }
+          },
+          {
+            "name": "app_id",
+            "type": "string",
+            "title": {
+              "en": "App ID"
+            },
+            "example": {
+              "en": "12"
+            }
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "app_is_running",
+        "title": {
+          "en": "App !{{is|isn't}} running"
+        },
+        "titleFormatted": {
+          "en": "App [[app]] !{{is|isn't}} running"
+        },
+        "hint": {
+          "en": "Checks whether a specific app/channel is currently active on the Roku device."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=roku"
+          },
+          {
+            "type": "autocomplete",
+            "name": "app",
+            "title": {
+              "en": "App"
+            },
+            "placeholder": {
+              "en": "Select an app (e.g. Netflix)"
+            }
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "launch_app",
+        "title": {
+          "en": "Launch app"
+        },
+        "titleFormatted": {
+          "en": "Launch app [[app]]"
+        },
+        "hint": {
+          "en": "Directly launches an installed Roku channel or app."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=roku"
+          },
+          {
+            "type": "autocomplete",
+            "name": "app",
+            "title": {
+              "en": "App"
+            },
+            "placeholder": {
+              "en": "Select an app (e.g. YouTube)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "send_remote_key",
+        "title": {
+          "en": "Send remote key"
+        },
+        "titleFormatted": {
+          "en": "Send remote key [[key]]"
+        },
+        "hint": {
+          "en": "Sends an ECP remote control keypress to the Roku device."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=roku"
+          },
+          {
+            "type": "dropdown",
+            "name": "key",
+            "title": {
+              "en": "Key"
+            },
+            "values": [
+              { "id": "Home", "title": { "en": "Home" } },
+              { "id": "Back", "title": { "en": "Back" } },
+              { "id": "Select", "title": { "en": "Select (OK)" } },
+              { "id": "Up", "title": { "en": "Up" } },
+              { "id": "Down", "title": { "en": "Down" } },
+              { "id": "Left", "title": { "en": "Left" } },
+              { "id": "Right", "title": { "en": "Right" } },
+              { "id": "Play", "title": { "en": "Play / Pause" } },
+              { "id": "Rev", "title": { "en": "Rewind" } },
+              { "id": "Fwd", "title": { "en": "Fast Forward" } },
+              { "id": "InstantReplay", "title": { "en": "Instant Replay" } },
+              { "id": "Info", "title": { "en": "Info (*)" } },
+              { "id": "Search", "title": { "en": "Search" } },
+              { "id": "Backspace", "title": { "en": "Backspace" } },
+              { "id": "Enter", "title": { "en": "Enter" } },
+              { "id": "FindRemote", "title": { "en": "Find Remote" } },
+              { "id": "PowerOn", "title": { "en": "Power On" } },
+              { "id": "PowerOff", "title": { "en": "Power Off" } },
+              { "id": "VolumeUp", "title": { "en": "Volume Up" } },
+              { "id": "VolumeDown", "title": { "en": "Volume Down" } },
+              { "id": "VolumeMute", "title": { "en": "Volume Mute" } },
+              { "id": "ChannelUp", "title": { "en": "Channel Up" } },
+              { "id": "ChannelDown", "title": { "en": "Channel Down" } },
+              { "id": "InputTuner", "title": { "en": "Input Tuner" } },
+              { "id": "InputHDMI1", "title": { "en": "Input HDMI 1" } },
+              { "id": "InputHDMI2", "title": { "en": "Input HDMI 2" } },
+              { "id": "InputHDMI3", "title": { "en": "Input HDMI 3" } },
+              { "id": "InputHDMI4", "title": { "en": "Input HDMI 4" } },
+              { "id": "InputAV1", "title": { "en": "Input AV 1" } }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "switch_hdmi_input",
+        "title": {
+          "en": "Switch HDMI input"
+        },
+        "titleFormatted": {
+          "en": "Switch to [[input]]"
+        },
+        "hint": {
+          "en": "Switches the active HDMI input on a Roku TV."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=roku"
+          },
+          {
+            "type": "dropdown",
+            "name": "input",
+            "title": {
+              "en": "HDMI Input"
+            },
+            "values": [
+              { "id": "InputHDMI1", "title": { "en": "HDMI 1" } },
+              { "id": "InputHDMI2", "title": { "en": "HDMI 2" } },
+              { "id": "InputHDMI3", "title": { "en": "HDMI 3" } },
+              { "id": "InputHDMI4", "title": { "en": "HDMI 4" } }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

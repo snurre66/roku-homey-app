@@ -1,0 +1,40 @@
+{
+  "title": {
+    "en": "App changed"
+  },
+  "titleFormatted": {
+    "en": "Active app changed"
+  },
+  "hint": {
+    "en": "Triggers when the currently running app or channel changes on the Roku device."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=roku"
+    }
+  ],
+  "tokens": [
+    {
+      "name": "app_name",
+      "type": "string",
+      "title": {
+        "en": "App Name"
+      },
+      "example": {
+        "en": "Netflix"
+      }
+    },
+    {
+      "name": "app_id",
+      "type": "string",
+      "title": {
+        "en": "App ID"
+      },
+      "example": {
+        "en": "12"
+      }
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "title": {
+    "en": "Launch app"
+  },
+  "titleFormatted": {
+    "en": "Launch app [[app]]"
+  },
+  "hint": {
+    "en": "Directly launches an installed Roku channel or app."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=roku"
+    },
+    {
+      "type": "autocomplete",
+      "name": "app",
+      "title": {
+        "en": "App"
+      },
+      "placeholder": {
+        "en": "Select an app (e.g. YouTube)"
+      }
+    }
+  ]
+}

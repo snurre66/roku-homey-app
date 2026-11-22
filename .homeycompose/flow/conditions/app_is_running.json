@@ -1,0 +1,28 @@
+{
+  "title": {
+    "en": "App !{{is|isn't}} running"
+  },
+  "titleFormatted": {
+    "en": "App [[app]] !{{is|isn't}} running"
+  },
+  "hint": {
+    "en": "Checks whether a specific app/channel is currently active on the Roku device."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=roku"
+    },
+    {
+      "type": "autocomplete",
+      "name": "app",
+      "title": {
+        "en": "App"
+      },
+      "placeholder": {
+        "en": "Select an app (e.g. Netflix)"
+      }
+    }
+  ]
+}

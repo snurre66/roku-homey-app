@@ -1,0 +1,96 @@
+{
+  "name": {
+    "en": "Roku"
+  },
+  "class": "tv",
+  "capabilities": [
+    "onoff",
+    "volume_up",
+    "volume_down",
+    "volume_mute",
+    "channel_up",
+    "channel_down",
+    "speaker_playing",
+    "speaker_next",
+    "speaker_prev",
+    "roku_active_app"
+  ],
+  "discovery": "roku_ecp",
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
+  "images": {
+    "small": "{{driverAssetsPath}}/images/small.png",
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "xlarge": "{{driverAssetsPath}}/images/xlarge.png"
+  },
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "verify_device"
+      }
+    },
+    {
+      "id": "manual_ip"
+    },
+    {
+      "id": "verify_device"
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Network Configuration"
+      },
+      "children": [
+        {
+          "id": "host",
+          "type": "text",
+          "label": {
+            "en": "IP Address"
+          },
+          "value": "",
+          "hint": {
+            "en": "The local IPv4 address of the Roku device."
+          }
+        },
+        {
+          "id": "port",
+          "type": "number",
+          "label": {
+            "en": "ECP Port"
+          },
+          "value": 8060,
+          "min": 1,
+          "max": 65535,
+          "hint": {
+            "en": "Roku's default External Control Protocol port is 8060."
+          }
+        },
+        {
+          "id": "poll_interval",
+          "type": "number",
+          "label": {
+            "en": "Poll Interval (seconds)"
+          },
+          "value": 10,
+          "min": 3,
+          "max": 300,
+          "hint": {
+            "en": "How often Homey checks the Roku's power state and active app."
+          }
+        }
+      ]
+    }
+  ]
+}

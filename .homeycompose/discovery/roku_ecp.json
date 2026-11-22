@@ -1,0 +1,7 @@
+{
+  "type": "ssdp",
+  "ssdp": {
+    "search": "roku:ecp"
+  },
+  "id": "{{headers.usn}}"
+}

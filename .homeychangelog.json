@@ -1,0 +1,5 @@
+{
+  "0.1.0": {
+    "en": "Initial test release of the Roku app for Homey with External Control Protocol (ECP) support, SSDP discovery, manual IP fallback, Flow cards, and Roku OS 11.5+ mobile app control verification."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "title": {
+    "en": "Switch HDMI input"
+  },
+  "titleFormatted": {
+    "en": "Switch to [[input]]"
+  },
+  "hint": {
+    "en": "Switches the active HDMI input on a Roku TV."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=roku"
+    },
+    {
+      "type": "dropdown",
+      "name": "input",
+      "title": {
+        "en": "HDMI Input"
+      },
+      "values": [
+        { "id": "InputHDMI1", "title": { "en": "HDMI 1" } },
+        { "id": "InputHDMI2", "title": { "en": "HDMI 2" } },
+        { "id": "InputHDMI3", "title": { "en": "HDMI 3" } },
+        { "id": "InputHDMI4", "title": { "en": "HDMI 4" } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 16px;
+      color: #1c1c1e;
+    }
+    .status-box {
+      background: #f8f7fa;
+      border: 1px solid #e2dce8;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 8px;
+    }
+    h1 {
+      font-size: 19px;
+      font-weight: 600;
+      margin: 0 0 10px 0;
+      color: #662D91;
+    }
+    p {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #444;
+      margin: 0 0 16px 0;
+    }
+    .alert-403 {
+      display: none;
+      background: #fff7e6;
+      border: 2px solid #ffa940;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+    .alert-403 h2 {
+      font-size: 16px;
+      color: #d46b08;
+      margin: 0 0 8px 0;
+    }
+    .instruction-path {
+      background: #fff;
+      border: 1px solid #ffd591;
+      border-radius: 6px;
+      padding: 12px;
+      font-weight: 600;
+      color: #873800;
+      font-size: 14px;
+      margin: 10px 0;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 12px 16px;
+      background: #662D91;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: center;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+    .btn-secondary {
+      background: #ebe6f2;
+      color: #662D91;
+    }
+  </style>
+</head>
+<body>
+  <div class="status-box">
+    <h1 id="view-title" data-i18n="pair.verify_device.title">Verifying Mobile App Control...</h1>
+    <p id="checking-msg" data-i18n="pair.verify_device.checking">
+      Testing External Control Protocol (ECP) permissions on your Roku...
+    </p>
+
+    <div id="forbidden-box" class="alert-403">
+      <h2 data-i18n="pair.verify_device.forbidden_title">Control by Mobile Apps is Restricted (HTTP 403)</h2>
+      <p>Your Roku device has Roku OS 11.5+ mobile control restrictions enabled and returned HTTP 403 Forbidden for remote control commands.</p>
+      <p>On your Roku, please configure:</p>
+      <div id="instruction-text" class="instruction-path">
+        Enable Settings → System → Advanced system settings → Control by mobile apps → Permissive
+      </div>
+      <button id="retry-btn" class="btn" data-i18n="pair.verify_device.retry_button">Retry Verification</button>
+      <button id="continue-btn" class="btn btn-secondary" data-i18n="pair.verify_device.continue_anyway_button">Add Device Anyway</button>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    (function () {
+      const checkingMsg = document.getElementById('checking-msg');
+      const forbiddenBox = document.getElementById('forbidden-box');
+      const instructionText = document.getElementById('instruction-text');
+      const retryBtn = document.getElementById('retry-btn');
+      const continueBtn = document.getElementById('continue-btn');
+
+      function runCheck() {
+        forbiddenBox.style.display = 'none';
+        checkingMsg.style.display = 'block';
+        Homey.showLoadingOverlay();
+
+        Homey.emit('verify_selected_device')
+          .then(function (result) {
+            Homey.hideLoadingOverlay();
+            if (result && result.needsManualIp) {
+              Homey.showView('manual_ip');
+              return;
+            }
+            if (result && result.forbidden) {
+              checkingMsg.style.display = 'none';
+              if (result.instruction) {
+                instructionText.textContent = result.instruction;
+              }
+              forbiddenBox.style.display = 'block';
+              return;
+            }
+            Homey.showView('add_devices');
+          })
+          .catch(function (err) {
+            Homey.hideLoadingOverlay();
+            Homey.alert(err && err.message ? err.message : String(err));
+          });
+      }
+
+      retryBtn.addEventListener('click', function () {
+        runCheck();
+      });
+
+      continueBtn.addEventListener('click', function () {
+        Homey.showView('add_devices');
+      });
+
+      runCheck();
+    })();
+  </script>
+</body>
+</html>
