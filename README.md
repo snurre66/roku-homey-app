@@ -1,6 +1,8 @@
-# Roku for Homey (SDK v3)
+# Roku (Community) for Homey (SDK v3)
 
 Control your Roku TVs and Roku Streaming Players locally via Roku's official **External Control Protocol (ECP)**.
+
+> **Disclaimer**: This is an unofficial, community-developed integration for Homey and is not affiliated with, endorsed by, or sponsored by Roku, Inc.
 
 ## Architecture & Features
 
