@@ -1,6 +1,6 @@
 {
   "id": "com.roku",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -29,5 +29,6 @@
   "bugs": {
     "url": "https://github.com/snurre66/roku-homey-app/issues"
   },
+  "homeyCommunityTopicId": 162541,
   "brandColor": "#662D91"
 }

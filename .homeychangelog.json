@@ -4,5 +4,8 @@
   },
   "0.1.1": {
     "en": "Updated app branding, icon, and description to clearly indicate this is an unofficial community-developed integration (Roku (Community))."
+  },
+  "0.1.2": {
+    "en": "Linked official Homey Community support forum topic (ID 162541)."
   }
 }
